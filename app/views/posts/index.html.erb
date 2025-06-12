@@ -5,8 +5,6 @@
     <%= notice %>
 </div>
 <% end %>
-
-<!-- Bandeau avec image dynamique de Picsum -->
 <div class="mb-5">
     <div class="position-relative text-white text-center">
         <img src="https://picsum.photos/1200/300?random=<%= rand(1000) %>" class="img-fluid w-100" style="object-fit: cover; height: 300px;" alt="Bannière aléatoire">
@@ -19,31 +17,26 @@
     </div>
 </div>
 
-<!-- Liste des posts -->
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        <% @posts.each do |post| %>
-        <div class="col">
-            <div class="card h-100 shadow-sm border-0">
-                <% if post.media.attached? %>
-                <%= image_tag post.media.first.variant(resize_to_limit: [600, 300]), class: "card-img-top", loading: "lazy" if post.media.first.image? %>
-                <% end %>
-
-                <div class="card-body">
-                    <h5 class="card-title"><%= post.title %></h5>
-                    <p class="card-text"><%= truncate(post.description, length: 100) %></p>
-                    <%= link_to "Voir ce post", post_path(post), class: "btn btn-outline-primary btn-sm" %>
-                </div>
+<div class="row">
+    <% @posts.each do |post| %>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <% if post.media.attached? %>
+            <%= image_tag post.media.first, class: "card-img-top", style: "object-fit: cover; height: 200px;" %>
+            <% end %>
+            <div class="card-body">
+                <h5 class="card-title"><%= post.title %></h5>
+                <p class="card-text"><%= truncate(post.content, length: 100) %></p>
             </div>
         </div>
-        <% end %>
     </div>
+    <% end %>
 </div>
 
 <div class="container my-5">
     <h2 class="text-center mb-4">Galerie inspirante</h2>
     <div class="row g-3">
-        <% 6.times do |i| %>
+        <% 3.times do |i| %>
         <div class="col-12 col-md-4">
             <img src="https://picsum.photos/seed/<%= rand(1000) %>/<%= [300, 400, 500].sample %>/<%= [200, 300].sample %>" class="img-fluid rounded shadow-sm" alt="Picsum random <%= i %>">
         </div>

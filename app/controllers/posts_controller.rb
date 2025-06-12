@@ -2,9 +2,10 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
-  def index
-    @posts = Post.all
-  end
+def index
+  @posts = Post.order(created_at: :desc)
+end
+
 
   # GET /posts/1 or /posts/1.json
   def show
@@ -21,16 +22,13 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    @post = current_user.posts.build(post_params)
+    if @post.save
+      flash[:notice] = "Post créé avec succès !"
+      redirect_to posts_path
+    else
+      flash.now[:alert] = "Erreur lors de la création du post."
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -63,8 +61,8 @@ class PostsController < ApplicationController
       @post = Post.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.expect(post: [ :title, :content, :user_id ])
-    end
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:title, :content, media: [])
+  end
 end
