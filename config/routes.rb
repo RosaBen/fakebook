@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 resources :posts do
   resources :comments, only: [ :create, :destroy ]
 end
-resource :session, only: [ :new, :create, :destroy ]
+resource :session, only: [ :new, :create ]
+delete "/logout", to: "sessions#destroy", as: :logout
+
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

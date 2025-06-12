@@ -10,8 +10,8 @@ def create
 
   if user && user.authenticate(user_params[:password])
     log_in(user)
-    flash[:notice] = "Connexion réussie !"
-    redirect_to root_path
+    flash[:notice] = "Connexion réussie !!!!!!"
+    redirect_to posts_path
   else
     flash.now[:alert] = "Email ou mot de passe invalide !"
     render :new, status: :unprocessable_entity
@@ -29,5 +29,4 @@ private
 def user_params
   params.require(:session).permit(:email, :password)
 end
-
 end

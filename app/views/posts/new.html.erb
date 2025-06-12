@@ -1,11 +1,12 @@
-<% content_for :title, "New post" %>
+<div class="container mt-5">
+    <div class="card shadow-lg rounded border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">📤 Créer un nouveau post</h2>
+            <%= link_to "Retour à l'accueil", posts_path, class: "btn btn-outline-light" %>
+        </div>
 
-<h1>New post</h1>
-
-<%= render "form", post: @post %>
-
-<br>
-
-<div>
-  <%= link_to "Back to posts", posts_path %>
+        <div class="card-body">
+            <%= render "shared/post_form", post: @post %>
+        </div>
+    </div>
 </div>
