@@ -1,0 +1,14 @@
+<%= form_with scope: :session, url: session_path, local: true, class: "needs-validation" do |form| %>
+
+<div class="mb-3">
+    <%= form.label :email, "Adresse email", class: "form-label" %>
+    <%= form.email_field :email, class: "form-control", required: true %>
+</div>
+
+<div class="mb-3">
+    <%= form.label :password, "Mot de passe", class: "form-label" %>
+    <%= form.password_field :password, class: "form-control", required: true %>
+</div>
+
+<%= form.submit "Connexion", class: "btn btn-primary" %>
+<% end %>

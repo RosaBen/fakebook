@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+            Inscription
+        </div>
+        <div class="card-body">
+            <%= form_with model: @user, local: true do |form| %>
+            <div class="mb-3">
+                <%= form.label :email, class: "form-label" %>
+                <%= form.email_field :email, class: "form-control", required: true %>
+            </div>
+
+            <div class="mb-3">
+                <%= form.label :password, class: "form-label" %>
+                <%= form.password_field :password, class: "form-control", required: true %>
+            </div>
+
+            <div class="mb-3">
+                <%= form.label :password_confirmation, class: "form-label" %>
+                <%= form.password_field :password_confirmation, class: "form-control", required: true %>
+            </div>
+
+            <%= form.submit "Créer mon compte", class: "btn btn-success" %>
+            <% end %>
+        </div>
+    </div>
+</div>
